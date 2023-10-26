@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
 
         list = new ArrayList<Contact>();
 
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         binding.content.recyclerView.setLayoutManager(layoutManager);
-        //binding.content.recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        binding.content.recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         binding.content.recyclerView.setAdapter(contactAdapter);
     }
 
@@ -48,5 +51,24 @@ public class MainActivity extends AppCompatActivity {
         list.add(contact);
         //Log.i("info", "Number of Contact" + list.size());
         contactAdapter.notifyDataSetChanged();
+    }
+
+    public boolean onCreateOptionsMenu (Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_activity_main, menu);
+        return true;
+
+    }
+
+    public boolean onOptionsItemSelected (MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_add) {
+            AddContactDialog addContactDialog = new AddContactDialog();
+            addContactDialog.show(getSupportFragmentManager(), "");
+        }
+
+        return super.onOptionsItemSelected(item);
+
     }
 }

@@ -5,6 +5,7 @@ import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,7 +58,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ListItem
             textViewName.setOnClickListener(this);
         }
 
-        public void onClick (View viww){
+        public void onClick (View view){
+
 
         }
     }

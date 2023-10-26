@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
 import edu.ucdenver.salimlakhani.phonebook.databinding.DialogAddContactBinding;
@@ -21,6 +23,27 @@ public class AddContactDialog extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(binding.getRoot());
+        binding.addContact.inflateMenu(R.menu.menu_add_contact);
+
+        binding.addContact.setOnMenuItemClickListener(
+                new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        int id = item.getItemId();
+
+                        if (id == R.id.action_exit) {
+                            dismiss();
+                        } else if (id == R.id.action_save) {
+                            saveData();
+
+                        }
+                        else {
+                            clearForm();
+                        }
+                        return false;
+                    }
+                }
+        );
 
         binding.buttonMainMenu.setOnClickListener(
                 new View.OnClickListener() {
