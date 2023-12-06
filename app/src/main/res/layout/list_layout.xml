@@ -2,13 +2,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewBookTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="24sp" />
+        android:text="Book Title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"/>
 
+    <TextView
+        android:id="@+id/textViewAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Author Name"
+        android:textSize="16sp"/>
+
+    <!-- Optionally, if you want to display the read status as well -->
+    <TextView
+        android:id="@+id/textViewReadStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Read Status"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"/>
 </LinearLayout>

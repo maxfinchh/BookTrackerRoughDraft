@@ -1,6 +1,5 @@
 package edu.ucdenver.salimlakhani.phonebook;
 
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,21 +10,20 @@ import android.view.View;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
-import edu.ucdenver.salimlakhani.phonebook.databinding.DialogAddContactBinding;
+import edu.ucdenver.salimlakhani.phonebook.databinding.DialogAddBookBinding; // Update the binding import
 
-public class AddContactDialog extends DialogFragment {
-    private DialogAddContactBinding binding;
+public class AddBookDialog extends DialogFragment {
+    private DialogAddBookBinding binding; // Update the binding class
 
     @Override
-    public Dialog onCreateDialog (Bundle savedInstanceState) {
-
-        binding = DialogAddContactBinding.inflate(LayoutInflater.from (getContext()));
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        binding = DialogAddBookBinding.inflate(LayoutInflater.from(getContext())); // Update the binding class
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(binding.getRoot());
-        binding.addContact.inflateMenu(R.menu.menu_add_contact);
+        binding.toolbarAddBook.inflateMenu(R.menu.menu_add_book); // Update menu reference
 
-        binding.addContact.setOnMenuItemClickListener(
+        binding.toolbarAddBook.setOnMenuItemClickListener(
                 new Toolbar.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -35,7 +33,6 @@ public class AddContactDialog extends DialogFragment {
                             dismiss();
                         } else if (id == R.id.action_save) {
                             saveData();
-
                         }
                         else {
                             clearForm();
@@ -47,7 +44,6 @@ public class AddContactDialog extends DialogFragment {
 
         binding.buttonMainMenu.setOnClickListener(
                 new View.OnClickListener() {
-
                     @Override
                     public void onClick(View v) {
                         dismiss();
@@ -66,58 +62,31 @@ public class AddContactDialog extends DialogFragment {
 
         binding.buttonSave.setOnClickListener(
                 new View.OnClickListener() {
-                    public void onClick (View v) {
+                    public void onClick(View v) {
                         saveData();
                     }
                 }
         );
 
-
-
         return builder.create();
     }
 
-    private void clearForm () {
-        binding.textInputName.setText("");
-        binding.textInputPhone.setText("");
-        binding.textInputEmail.setText("");
-        binding.textInputStreet.setText("");
-        binding.textInputCity.setText("");
-        binding.textInputState.setText("");
-        binding.textInputZip.setText("");
-        binding.radioButtonBusiness.setChecked(true);
-        binding.textInputName.requestFocus();
+    private void clearForm() {
+        binding.textInputBookTitle.setText("");
+        binding.textInputAuthor.setText("");
+        binding.radioButtonRead.setChecked(true); // Assuming 'Read' as default
+        binding.textInputBookTitle.requestFocus();
     }
 
-    private void saveData () {
-        String name = binding.textInputName.getText().toString();
-        String phone = binding.textInputPhone.getText().toString();
-        String email = binding.textInputEmail.getText().toString();
-        String street = binding.textInputStreet.getText().toString();
-        String city = binding.textInputCity.getText().toString();
-        String state = binding.textInputState.getText().toString();
-        String zip = binding.textInputZip.getText().toString();
+    private void saveData() {
+        String bookTitle = binding.textInputBookTitle.getText().toString();
+        String author = binding.textInputAuthor.getText().toString();
+        String readStatus = binding.radioButtonRead.isChecked() ? "Read" : "Want to Read";
 
-        String contactType = "";
-
-        if (binding.radioButtonBusiness.isChecked()) {
-            contactType = "Business";
-        } else if (binding.radioButtonFamily.isChecked()) {
-            contactType = "Family";
-        } else {
-            contactType = "Friend";
-        }
-
-        Contact contact = new Contact(name, phone, email, street, city, state, zip, contactType);
+        // Replace Contact with a BookEntry class or similar
+        BookEntry bookEntry = new BookEntry(bookTitle, author, readStatus);
         MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.addContact(contact);
+        mainActivity.addBookEntry(bookEntry); // Update method to handle book entry
         dismiss();
-
-
     }
-
-
-
-
-
 }

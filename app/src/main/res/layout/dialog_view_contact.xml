@@ -4,12 +4,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/textViewLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/label_view_contact"
+        android:text="@string/label_view_book_entry"
         android:textColor="@android:color/background_dark"
         android:textSize="50sp" />
 
@@ -28,16 +29,16 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textLabelName"
+                android:id="@+id/textLabelBook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:padding="4dp"
-                android:text="@string/label_name"
+                android:text="@string/label_book"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textViewName"
+                android:id="@+id/textViewBook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -50,39 +51,16 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textLabelPhone"
+                android:id="@+id/textLabelAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:padding="4dp"
-                android:text="@string/label_phone"
+                android:text="@string/label_author"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/textViewPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:textSize="18sp" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textLabelEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:text="@string/label_email"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewEmail"
+                android:id="@+id/textViewAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
@@ -90,116 +68,7 @@
                 android:textSize="18sp" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textLabelStreet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:text="@string/label_street"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewStreet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textLabelCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:text="@string/label_city"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textLabelState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:text="@string/label_state"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:textSize="18sp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textLabelZip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:text="@string/label_zip"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewZip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:textSize="18sp" />
-        </TableRow>
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/textLabelType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:text="@string/label_type_view"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textViewType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:padding="4dp"
-                android:textSize="18sp" />
-        </TableRow>
+        <!-- Additional rows for other book details like 'Read Status' can be added here -->
 
         <TableRow
             android:layout_width="match_parent"
@@ -240,8 +109,6 @@
                 android:text="@string/button_edit"
                 android:textSize="18sp"
                 tools:ignore="TextContrastCheck" />
-
         </TableRow>
-
     </TableLayout>
 </LinearLayout>

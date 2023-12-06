@@ -6,11 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,57 +15,45 @@ import edu.ucdenver.salimlakhani.phonebook.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Contact> list;
+    private ArrayList<BookEntry> list;
     private ActivityMainBinding binding;
-    private ContactAdapter contactAdapter;
+    private BookEntryAdapter bookEntryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
-        list = new ArrayList<Contact>();
+        list = new ArrayList<>();
 
-        contactAdapter = new ContactAdapter(this, list);
+        bookEntryAdapter = new BookEntryAdapter(this, list);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         binding.content.recyclerView.setLayoutManager(layoutManager);
         binding.content.recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        binding.content.recyclerView.setAdapter(contactAdapter);
+        binding.content.recyclerView.setAdapter(bookEntryAdapter);
     }
 
-    public void addContact(View view) {
-       // Toast.makeText(this, "You clicked on Add Contact Button", Toast.LENGTH_LONG).show();
-        AddContactDialog addContactDialog = new AddContactDialog();
-        addContactDialog.show(getSupportFragmentManager(), "");
+    public void addBookEntry(BookEntry bookEntry) {
+        list.add(bookEntry);
+        bookEntryAdapter.notifyDataSetChanged();
     }
 
-
-    public void addContact (Contact contact) {
-        list.add(contact);
-        //Log.i("info", "Number of Contact" + list.size());
-        contactAdapter.notifyDataSetChanged();
-    }
-
-    public boolean onCreateOptionsMenu (Menu menu) {
-
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;
-
     }
 
-    public boolean onOptionsItemSelected (MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_add) {
-            AddContactDialog addContactDialog = new AddContactDialog();
-            addContactDialog.show(getSupportFragmentManager(), "");
+            AddBookDialog addBookDialog = new AddBookDialog();
+            addBookDialog.show(getSupportFragmentManager(), "");
         }
 
         return super.onOptionsItemSelected(item);
-
     }
 }
