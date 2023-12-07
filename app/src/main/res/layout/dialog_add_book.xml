@@ -60,26 +60,24 @@
         android:text="@string/label_intention" />
 
     <RadioGroup
-        android:id="@+id/radioGroupStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:id="@+id/radioGroupReadStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/radioButtonRead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/radio_button_read"
-            android:textSize="18sp" />
+            android:text="Read"/>
 
         <RadioButton
             android:id="@+id/radioButtonWantToRead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/radio_button_wantto"
-            android:textSize="18sp" />
+            android:text="Want to Read"/>
     </RadioGroup>
 
-    <!-- Buttons layout -->
 
     <LinearLayout
         android:layout_width="match_parent"

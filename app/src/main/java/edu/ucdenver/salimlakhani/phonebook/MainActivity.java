@@ -41,6 +41,39 @@ public class MainActivity extends AppCompatActivity {
         bookEntryAdapter.notifyDataSetChanged();
     }
 
+    // Method to delete a book entry from the list
+    public void deleteBookEntry(int position) {
+        if(position >= 0 && position < list.size()) {
+            list.remove(position);
+            bookEntryAdapter.notifyItemRemoved(position);
+            bookEntryAdapter.notifyItemRangeChanged(position, list.size());
+        }
+    }
+
+    public void editBookEntry(int position) {
+        BookEntry bookEntry = list.get(position);
+        AddBookDialog editDialog = new AddBookDialog();
+
+        // Pass the book entry data to the dialog, possibly through a bundle
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position); // Pass the position to know where to update
+        bundle.putString("bookTitle", bookEntry.getBookTitle());
+        bundle.putString("author", bookEntry.getAuthor());
+        bundle.putString("readStatus", bookEntry.getReadStatus());
+        editDialog.setArguments(bundle);
+
+        // Show the dialog
+        editDialog.show(getSupportFragmentManager(), "editBook");
+    }
+
+    public void updateBookEntry(int position, BookEntry bookEntry) {
+        // Update the book entry in the list and notify the adapter
+        if(position >= 0 && position < list.size()) {
+            list.set(position, bookEntry);
+            bookEntryAdapter.notifyItemChanged(position);
+        }
+    }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_activity_main, menu);
         return true;

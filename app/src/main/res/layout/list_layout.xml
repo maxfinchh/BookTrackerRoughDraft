@@ -21,12 +21,28 @@
         android:text="Author Name"
         android:textSize="16sp"/>
 
-    <!-- Optionally, if you want to display the read status as well -->
+
     <TextView
         android:id="@+id/textViewReadStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Read Status"
+        android:text="Read Status:"
         android:textSize="14sp"
         android:layout_marginTop="4dp"/>
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:layout_alignParentRight="true"/>
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
 </LinearLayout>

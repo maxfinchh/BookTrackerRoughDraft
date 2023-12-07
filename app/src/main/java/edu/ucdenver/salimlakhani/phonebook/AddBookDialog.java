@@ -10,18 +10,38 @@ import android.view.View;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 
-import edu.ucdenver.salimlakhani.phonebook.databinding.DialogAddBookBinding; // Update the binding import
+import edu.ucdenver.salimlakhani.phonebook.databinding.DialogAddBookBinding;
 
 public class AddBookDialog extends DialogFragment {
-    private DialogAddBookBinding binding; // Update the binding class
+    private DialogAddBookBinding binding;
+    private boolean isEditMode = false;
+    private int editPosition = -1;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        binding = DialogAddBookBinding.inflate(LayoutInflater.from(getContext())); // Update the binding class
+        binding = DialogAddBookBinding.inflate(LayoutInflater.from(getContext()));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setView(binding.getRoot());
-        binding.toolbarAddBook.inflateMenu(R.menu.menu_add_book); // Update menu reference
+
+        // Check if we're in edit mode
+        if (getArguments() != null) {
+            isEditMode = true;
+            editPosition = getArguments().getInt("position", -1);
+            String bookTitle = getArguments().getString("bookTitle");
+            String author = getArguments().getString("author");
+            String readStatus = getArguments().getString("readStatus");
+
+            binding.textInputBookTitle.setText(bookTitle);
+            binding.textInputAuthor.setText(author);
+            if ("Read".equals(readStatus)) {
+                binding.radioButtonRead.setChecked(true);
+            } else {
+                binding.radioButtonWantToRead.setChecked(true);
+            }
+        }
+
+        binding.toolbarAddBook.inflateMenu(R.menu.menu_add_book);
 
         binding.toolbarAddBook.setOnMenuItemClickListener(
                 new Toolbar.OnMenuItemClickListener() {
@@ -33,8 +53,7 @@ public class AddBookDialog extends DialogFragment {
                             dismiss();
                         } else if (id == R.id.action_save) {
                             saveData();
-                        }
-                        else {
+                        } else {
                             clearForm();
                         }
                         return false;
@@ -42,31 +61,11 @@ public class AddBookDialog extends DialogFragment {
                 }
         );
 
-        binding.buttonMainMenu.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dismiss();
-                    }
-                }
-        );
+        binding.buttonMainMenu.setOnClickListener(v -> dismiss());
 
-        binding.buttonClear.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        clearForm();
-                    }
-                }
-        );
+        binding.buttonClear.setOnClickListener(v -> clearForm());
 
-        binding.buttonSave.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        saveData();
-                    }
-                }
-        );
+        binding.buttonSave.setOnClickListener(v -> saveData());
 
         return builder.create();
     }
@@ -74,8 +73,7 @@ public class AddBookDialog extends DialogFragment {
     private void clearForm() {
         binding.textInputBookTitle.setText("");
         binding.textInputAuthor.setText("");
-        binding.radioButtonRead.setChecked(true); // Assuming 'Read' as default
-        binding.textInputBookTitle.requestFocus();
+        binding.radioGroupReadStatus.clearCheck();
     }
 
     private void saveData() {
@@ -83,10 +81,17 @@ public class AddBookDialog extends DialogFragment {
         String author = binding.textInputAuthor.getText().toString();
         String readStatus = binding.radioButtonRead.isChecked() ? "Read" : "Want to Read";
 
-        // Replace Contact with a BookEntry class or similar
         BookEntry bookEntry = new BookEntry(bookTitle, author, readStatus);
         MainActivity mainActivity = (MainActivity) getActivity();
-        mainActivity.addBookEntry(bookEntry); // Update method to handle book entry
+
+        if (isEditMode) {
+            // If it's edit mode, update the existing entry
+            mainActivity.updateBookEntry(editPosition, bookEntry);
+        } else {
+            // If it's add mode, add a new entry
+            mainActivity.addBookEntry(bookEntry);
+        }
+
         dismiss();
     }
 }
