@@ -7,12 +7,4 @@
         android:icon="@drawable/baseline_add_circle_outline_24"
         android:title="Add"
         app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/action_name"
-        android:title="Name"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_phone"
-        android:title="Phone"
-        app:showAsAction="never" />
 </menu>
